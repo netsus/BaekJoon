@@ -17,11 +17,11 @@
 """
 from itertools import combinations
 
-problem = list(input())
-p, brk_idx = [],[]
-result=set()
+problem = list(input()) # 문제 입력받는 리스트
+p, brk_idx = [],[] # 괄호쌍 찾을 스택 -> p , 괄호쌍 인덱스 저장할 이중리스트 -> brk_idx
+result=set() # 결과 저장할 집합
 
-for i,v in enumerate(problem):
+for i,v in enumerate(problem): ## 괄호쌍 인덱스 저장 및 problem에서 괄호 제거
     if v == '(':
         problem[i]=''
         p.append(i)
@@ -29,11 +29,11 @@ for i,v in enumerate(problem):
         problem[i]=''
         brk_idx.append([p.pop(),i])      
 
-for i in range(len(brk_idx)):
+for i in range(len(brk_idx)): ## 괄호쌍의 조합(combinations)을 이용해 괄호 추가
     for j in combinations(brk_idx,i):
         P=problem[:]
         for s,e in j:
             P[s]='('
             P[e]=')'
         result.add(''.join(P))
-print(*sorted(result),sep='\n')
+print(*sorted(result),sep='\n') ## 결과 출력
